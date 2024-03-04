@@ -1,5 +1,6 @@
 import Navbar from './NavCom/Navbar';
 import Footer  from './NavCom/footer';
+import About from './Pages/About';
 import './Styles/Style.css'
 
 function App() {
@@ -7,9 +8,7 @@ function App() {
     <>
       <div className="bg-inherit text-white min-h-screen">
         <Navbar />
-        <div className='div-class'>
-
-        </div>
+        <About />
         <Footer />
       </div>
     </>

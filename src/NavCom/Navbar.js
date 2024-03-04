@@ -9,9 +9,11 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center">
 
         <div className="font-bold text-xl">
-          <Button variant="rounded-full" className="rounded-full no-underline text-xl">
-            Compta Easy
-          </Button>  
+          <a href='/'>
+            <Button variant="rounded-full" className="rounded-full no-underline text-xl">
+              Compta Easy
+            </Button>
+          </a>  
         </div>
 
         <div className="space-x-4">
@@ -22,7 +24,7 @@ const Navbar = () => {
           </Button>
         </a>
 
-        <a href="#" className="hover:underline">
+        <a href="/Pages/About.js" className="hover:underline">
           <Button variant="gradient" className="rounded-full">
             About
           </Button>
