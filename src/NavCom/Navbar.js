@@ -2,6 +2,8 @@ import React from 'react';
 import { Button } from "@material-tailwind/react";
 import Routing from '../Routing/Routing';
 import ChipsProfile from '../Elements/ChipsProfile';
+import Login from '../Elements/Login';
+import ProfileMenu from '../Elements/ProfileMenu';
 
 
 const Navbar = () => {
@@ -20,7 +22,7 @@ const Navbar = () => {
         </div>
 
         <div className="space-x-4">
-
+      
         <a href="/Home" className="hover:underline">
           <Button variant="gradient" className="rounded-full no-underline">
             Home
@@ -34,13 +36,15 @@ const Navbar = () => {
         </a>
 
         <a href="/Contact" className="hover:underline">
-          <Button variant="gradient" className="rounded-full">
+          <Button className="rounded-full">
             Contact
           </Button>
         </a>
-        <a href="/Contact" className="hover:underline">
+        <Login />
+
+        <a  className="hover:underline">
           <Button className="rounded-full">
-            <ChipsProfile />
+            <ProfileMenu />   
           </Button>
         </a>
 

@@ -2,7 +2,6 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';        
 
-
 body {
     position: relative;
     margin: 0;
@@ -34,13 +33,7 @@ body img.no-blur {
     -webkit-filter: none;       /* Remove blur effect for images with class 'no-blur' */
 }
 
-
-.footer-class{
-    /* background-color: rgb(141, 153, 163); */
-}
-
-
 .div-class{
-    margin: 30px;
+    margin: 80px;
     padding: 10px;
 }

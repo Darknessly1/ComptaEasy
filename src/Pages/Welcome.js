@@ -1,12 +1,7 @@
-// import { Button } from "@material-tailwind/react";  
 import React from 'react';
 import {
-    Card,
-    CardBody,
-    CardFooter,
-    Typography,
     Button,
-  } from "@material-tailwind/react";
+} from "@material-tailwind/react";
 
 const Welcome = () => {
   return (
