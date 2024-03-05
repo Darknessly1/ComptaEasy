@@ -11,8 +11,8 @@ function footer() {
           <div>
             <Footer.Brand
               href="https://ComptaEasy.com"
-              src="logo.jpg"
-              alt="Flowbite Logo"
+              // src="logo.jpg"
+              // alt="ComptaEasy Logo"
               name="ComptaEasy"
             />
           </div>
