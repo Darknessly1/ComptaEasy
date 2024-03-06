@@ -6,8 +6,8 @@ import {
 const Welcome = () => {
   return (
     <>
-    <div className="bg-transparent h-screen flex items-center  justify-center">
-      <div className="text-black text-center">
+    <div className="h-screen flex items-center  justify-center flex-col min-h-screen bg-amber-700/50 m-4">
+      <div className="text-white text-center">
         <h1 className="text-7xl font-bold mb-4 not-italic hover:italic">Welcome to ComtaEasy</h1>
         <p className="text-xl mb-8 font-bold">
           Your go-to platform for accounting information and resources.

@@ -3,6 +3,7 @@ import About from '../Pages/About';
 import Welcome from '../Pages/Welcome';
 import ProfilePage from '../Pages/ProfilePage';
 import Home from '../Pages/Home';
+import Contact from '../Pages/Contact';
 
 
 export default function Routing() {
@@ -13,6 +14,7 @@ export default function Routing() {
               <Route path="/Welcome" element={<Welcome />} />
               <Route path="/ProfilePage" element={<ProfilePage />} />
               <Route path="/Home" element={<Home />} />
+              <Route path="/Contact" element={<Contact />} />
             </Routes>
         </div>
     )
