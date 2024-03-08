@@ -28,14 +28,17 @@ const profileMenuItems = [
     {
       label: "Edit Profile",
       icon: Cog6ToothIcon,
+      linkTo: '../Pages/EditProfile'
     },
     {
       label: "Inbox",
       icon: InboxArrowDownIcon,
+      linkTo: '../Pages/Inbox'
     },
     {
       label: "Help",
       icon: LifebuoyIcon,
+      linkTo: '../Pages/Help'
     },
     {
       label: "Sign Out",
