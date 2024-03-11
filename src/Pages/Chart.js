@@ -1,24 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import data from './JSON_Kontenplan_Vorlage.json';
 
 const SearchBarFilter = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredSentences, setFilteredSentences] = useState([]);
-
-  const handleInputChange = (event) => {
-    const { value } = event.target;
-    setSearchTerm(value);
-    filterData(value);
-  };
-
-  const filterData = (searchTerm) => {
-    const sentences = extractSentences(data.root.childrens);
-    const filteredSentences = sentences.filter((sentence) =>
-      sentence.text.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-    setFilteredSentences(filteredSentences);
-  };
 
   const extractSentences = (items, parentLevel = '') => {
     const sentences = [];
@@ -40,6 +25,24 @@ const SearchBarFilter = () => {
 
   const allSentences = extractSentences(data.root.childrens);
 
+  useEffect(() => {
+    setFilteredSentences(allSentences);
+  }, []);
+
+  const handleInputChange = (event) => {
+    const { value } = event.target;
+    setSearchTerm(value);
+    filterData(value);
+  };
+
+  const filterData = (searchTerm) => {
+    const filteredSentences = allSentences.filter((sentence) =>
+      sentence.text.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    setFilteredSentences(filteredSentences);
+  };
+
   return (
     <div className="h-screen m-4 flex items-center justify-center flex-col min-h-screen bg-gray-900/50">
       <div className="w-72">
@@ -58,9 +61,9 @@ const SearchBarFilter = () => {
 
       <div className="relative w-fit m-5 flex flex-col mt-6 p-4 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl" style={{ overflowY: 'auto', maxHeight: '400px' }}>
         <ul>
-          {allSentences.map((sentence, index) => (
+          {filteredSentences.map((sentence, index) => (
             <li key={index} className="mb-2">
-              <span className="text-blue-800"> {sentence.text}</span>
+              <span className="text-blue-800">{sentence.text}</span>
               <span className="text-gray-500 text-sm ml-2">(Level: {sentence.level})</span>
             </li>
           ))}
