@@ -6,6 +6,7 @@ import Home from '../Pages/News';
 import Contact from '../Pages/Contact';
 import Register from '../Elements/Register';
 import Chart from '../Pages/Chart';
+import Booking from '../Pages/Booking';
 
 
 export default function Routing() {
@@ -19,6 +20,7 @@ export default function Routing() {
               <Route path="/Contact" element={<Contact />} />
               <Route path="/Register" element={<Register />} />
               <Route path="/Chart" element={<Chart />} />
+              <Route path="/Booking" element={<Booking />} />
             </Routes>
         </div>
     )
