@@ -77,50 +77,73 @@ const Booking = () => {
     <div className="p-5 bg-gray-900/50 m-4">
       <h1 className="text-3xl font-bold mb-4 text-white">Chart of Accounts</h1>
 
-      <div className="flex flex-wrap -mx-4 mb-4">
-        <div className="w-full md:w-1/2 lg:w-1/3 px-4 mb-4">
-          <label className="block text-white text-sm font-bold mb-2">Account Name</label>
-          <input
-            type="text"
-            name="name"
-            value={newAccount.name}
-            onChange={handleInputChange}
-            className="w-full bg-white border text-black border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-          />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+
+        <div className='m-2'>
+          <label for="inputname" class="block text-white-800 font-semibold text-sm">
+            <h4>Account Name</h4>
+          </label>
+          <div class="mt-2">
+            <input
+              type="text"
+              name="name"
+              value={newAccount.name}
+              onChange={handleInputChange}
+              class="block w-56 rounded-md py-1.5 px-2 ring-1 ring-inset ring-black-400 focus:text-gray-800 text-black"
+            />
+          </div>
+          <label class="pt-1 block text-white-500 text-sm">Some Description</label>
         </div>
 
-        <div className="w-full md:w-1/2 lg:w-1/3 px-4 mb-4">
-          <label className="block text-white text-sm font-bold mb-2">Account Type</label>
-          <input
-            type="text"
-            name="type"
-            value={newAccount.type}
-            onChange={handleInputChange}
-            className="w-full bg-white border text-black border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-          />
+        <div className='m-2'>
+          <label for="inputname" class="block text-white-800 font-semibold text-sm">
+            Account Type
+          </label>
+          <div class="mt-2">
+            <input
+              type="text"
+              name="type"
+              value={newAccount.type}
+              onChange={handleInputChange}
+              class="block w-56 rounded-md py-1.5 px-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800 text-black"
+            />
+          </div>
+          <label class="pt-1 block text-white-500 text-sm">Some Description</label>
         </div>
 
-        <div className="w-full md:w-1/2 lg:w-1/3 px-4 mb-4">
-          <label className="block text-white text-sm font-bold mb-2">Date</label>
-          <input
-            type="date"
-            name="date"
-            value={newAccount.date}
-            onChange={handleInputChange}
-            className="w-full bg-white border text-black border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-          />
+        <div className='m-2'>
+          <label for="inputname" class="block text-white-800 font-semibold text-sm">
+            Date
+          </label>
+          <div class="mt-2">
+            <input
+              type="date"
+              name="date"
+              value={newAccount.date}
+              onChange={handleInputChange}
+              class="block w-56 rounded-md py-1.5 px-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800 text-black"
+            />
+          </div>
+          <label class="pt-1 block text-white-500 text-sm">Some Description</label>
         </div>
 
-        <div className="w-full md:w-1/2 lg:w-1/3 px-4 mb-4">
-          <label className="block text-white text-sm font-bold mb-2">Amount</label>
-          <input
-            type="number"
-            name="amount"
-            value={newAccount.amount}
-            onChange={handleInputChange}
-            className="w-full bg-white border text-black border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-          />
+
+        <div className='m-2'>
+          <label for="inputname" class="block text-white-800 font-semibold text-sm">
+            Amount
+          </label>
+          <div class="mt-2">
+            <input
+              type="number"
+              name="amount"
+              value={newAccount.amount}
+              onChange={handleInputChange}
+              class="block w-56 rounded-md py-1.5 px-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800 text-black"
+            />
+          </div>
+          <label class="pt-1 block text-white-500 text-sm">Some Description</label>
         </div>
+
 
         <div className="w-full md:w-1/2 lg:w-1/3 px-4 mb-4">
           <label className="block text-white text-sm font-bold mb-2">Currency</label>
@@ -128,15 +151,17 @@ const Booking = () => {
             name="currency"
             value={newAccount.currency}
             onChange={handleInputChange}
-            className="w-full bg-white border text-black border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+            className="w-fit bg-white border text-black border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
           >
-            <option value="">Select Currency</option>
+            <option value="">Currency</option>
             <option value="USD">USD</option>
             <option value="EUR">EUR</option>
             <option value="GBP">GBP</option>
             <option value="MAD">MAD</option>
           </select>
         </div>
+
+
       </div>
 
       <button
