@@ -152,17 +152,12 @@ const Navbar = () => {
               )}
             </div>
 
-
-
-
-
-
             {/* should be a if condiciont, if the user didn't singup it will shouw him the sing up
               if he's a usr it will the following be appear in his page <ProfileMenu /> */}
 
             <a href="/Login" className="hover:underline">
               <Button className="rounded-full">
-                Login
+                Sign Up
               </Button>
             </a>
 

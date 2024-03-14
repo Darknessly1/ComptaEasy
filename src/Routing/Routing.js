@@ -8,6 +8,7 @@ import Register from '../Elements/Register';
 import Chart from '../Pages/Chart';
 import Booking from '../Pages/Booking';
 import LoginForm from '../Elements/Login';
+import SignIn from '../Elements/Signin';
 
 
 export default function Routing() {
@@ -23,6 +24,7 @@ export default function Routing() {
               <Route path="/Chart" element={<Chart />} />
               <Route path="/Booking" element={<Booking />} />
               <Route path="/Login" element={<LoginForm />} />
+              <Route path="/Signin" element={<SignIn />} />
             </Routes>
         </div>
     )

@@ -1,28 +1,44 @@
 import React, { useState } from "react";
-import '../Styles/Logincss.css'
 import axios from "axios";
 
 export default function LoginForm() {
   const [values, setValues] = useState({
     username: '',
     email: '',
-    password: ''
-  })
+    password: '',
+    confirmPassword: ''
+  });
+
+  const [passwordMatch, setPasswordMatch] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { username, email, password } = values; 
-    axios.post('http://localhost:8081/login', { username, email, password })
-      .then(resp => console.log("Registered Successfully"))
-      .catch(err => console.log(err));
+    if (values.password === values.confirmPassword) {
+      const { username, email, password } = values; 
+      axios.post('http://localhost:8081/login', { username, email, password })
+        .then(resp => console.log("Registered Successfully"))
+        .catch(err => console.log(err));
+    } else {
+      alert('Passwords do not match!');
+    }
   };
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setValues(prevValues => ({
       ...prevValues,
-      [e.target.name]: e.target.value
-    }))
+      [name]: value
+    }));
   }
+
+  const handleConfirmPasswordChange = (e) => {
+    const confirmPassword = e.target.value;
+    setValues(prevValues => ({
+      ...prevValues,
+      confirmPassword
+    }));
+    setPasswordMatch(values.password === confirmPassword);
+  };
 
   return (
     <div className="container w-full max-w-md mx-auto xl:max-w-3xl h-full flex bg-white rounded-lg shadow overflow-hidden m-5">
@@ -34,14 +50,16 @@ export default function LoginForm() {
         />
       </div>
       <div className="w-full xl:w-1/2 p-8">
-        <form method="post" action="#" onSubmit={handleSubmit}>
-          <h1 className="text-2xl font-bold">Sign in to your account</h1>
+        <form onSubmit={handleSubmit}>
+          <h1 className="text-2xl font-bold text-black">Sign in If you don't have an account</h1>
           <div>
             <span className="text-gray-600 text-sm">
               Do you have an account?  
             </span>
             <button className="text-gray-700 text-sm font-semibold">
-              Sign in
+              <a href="/SignIn"> 
+                Sign in
+              </a>
             </button>
           </div>
           <div className="mb-4 mt-6">
@@ -94,28 +112,24 @@ export default function LoginForm() {
               placeholder="Your password"
               onChange={handleChange}
             />
+          </div>
+          <div className="mb-6 mt-6">
             <label
               className="block text-gray-700 text-sm font-semibold mb-2"
-              htmlFor="password"
+              htmlFor="confirmPassword"
             >
-              Conferme you password
+              Confirm Password
             </label>
             <input
-              name="password"
-              value={values.password}
+              name="confirmPassword"
+              value={values.confirmPassword}
               className="text-sm bg-gray-200 appearance-none rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline h-10"
-              id="password"
+              id="confirmPassword"
               type="password"
-              placeholder="Your password"
-              onChange={handleChange}
+              placeholder="Confirm your password"
+              onChange={handleConfirmPasswordChange}
             />
-
-            <a
-              className="inline-block align-baseline text-sm text-gray-600 hover:text-gray-800"
-              href="#"
-            >
-              Forgot Password?
-            </a>
+            {!passwordMatch && <p className="text-red-500">Passwords do not match!</p>}
           </div>
           <div className="flex w-full mt-8">
             <button
