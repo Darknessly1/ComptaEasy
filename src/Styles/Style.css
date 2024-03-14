@@ -20,19 +20,19 @@ body::before {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    filter: blur(8px);          
+    /* filter: blur(8px);           */
     /* -webkit-filter: blur(8px);  */
     z-index: -1;                
 }
 
-body img {
+/* body img {
     filter: blur(5px);
-}
+} */
 
-body img.no-blur {
-    filter: none;               /* Remove blur effect for images with class 'no-blur' */
-    -webkit-filter: none;       /* Remove blur effect for images with class 'no-blur' */
-}
+/* body img.no-blur {
+    filter: none;              
+    -webkit-filter: none;       
+} */
 
 .div-class{
     margin: 80px;

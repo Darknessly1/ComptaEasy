@@ -7,6 +7,7 @@ import Contact from '../Pages/Contact';
 import Register from '../Elements/Register';
 import Chart from '../Pages/Chart';
 import Booking from '../Pages/Booking';
+import LoginForm from '../Elements/Login';
 
 
 export default function Routing() {
@@ -21,6 +22,7 @@ export default function Routing() {
               <Route path="/Register" element={<Register />} />
               <Route path="/Chart" element={<Chart />} />
               <Route path="/Booking" element={<Booking />} />
+              <Route path="/Login" element={<LoginForm />} />
             </Routes>
         </div>
     )

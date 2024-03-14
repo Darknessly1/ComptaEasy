@@ -1,167 +1,132 @@
-import React from "react";
-import {
-  Button,
-  Dialog,
-  Card,
-  CardBody,
-  CardFooter,
-  Typography,
-  Input,
-  Checkbox,
-} from "@material-tailwind/react";
-import Terms from "./Terms";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import '../Styles/Logincss.css'
+import axios from "axios";
 
-export default function Login() {
-  const [signInOpen, setSignInOpen] = React.useState(false);
-  const [signUpOpen, setSignUpOpen] = React.useState(false);
+export default function LoginForm() {
+  const [values, setValues] = useState({
+    username: '',
+    email: '',
+    password: ''
+  })
 
-  const navigate = useNavigate();
-
-  const handleSignInOpen = () => setSignInOpen(true);
-  const handleSignInClose = () => setSignInOpen(false);
-
-  const handleSignUpOpen = () => setSignUpOpen(true);
-  const handleSignUpClose = () => setSignUpOpen(false);
-
-  const handleSignUp = () => {
-    navigate('./Register');
-    handleSignUpClose();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { username, email, password } = values; 
+    axios.post('http://localhost:8081/login', { username, email, password })
+      .then(resp => console.log("Registered Successfully"))
+      .catch(err => console.log(err));
   };
 
-  return (
-    <>
-      <Button onClick={handleSignInOpen}>Sign In</Button>
-      <Dialog size="xs" open={signInOpen} handler={handleSignInClose}>
-        <Card className="mx-auto w-full max-w-[24rem]">
-          <CardBody className="flex flex-col gap-4">
-            <Typography variant="h4" color="blue-gray">
-              Sign In
-            </Typography>
-            <Typography
-              className="mb-3 font-normal"
-              variant="paragraph"
-              color="gray"
-            >
-              Enter your email and password to Sign In.
-            </Typography>
-            <Typography className="-mb-2" variant="h6">
-              Your Email
-            </Typography>
-            <Input label="Email" size="lg" />
-            <Typography className="-mb-2" variant="h6">
-              Your Password
-            </Typography>
-            <Input label="Password" size="lg" />
-            <div className="-ml-2.5 -mt-3">
-              <Checkbox label="Remember Me" />
-              <Typography 
-                className="ml-1 font-bold"
-                color="blue-gray"
-              >
-                <Terms />
-              </Typography>
-            </div>
-          </CardBody>
-          <CardFooter className="pt-0">
-            <Button variant="gradient" onClick={handleSignInClose} fullWidth>
-              Sign In
-            </Button>
-            <Typography variant="small" className="mt-4 flex justify-center">
-              Don&apos;t have an account?
-              <Typography
-                as="a"
-                href="#signup"
-                variant="small"
-                color="blue-gray"
-                className="ml-1 font-bold"
-                onClick={handleSignUpOpen}
-              >
-                Sign up
-              </Typography>
-            </Typography>
-          </CardFooter>
-        </Card>
-      </Dialog>
+  const handleChange = (e) => {
+    setValues(prevValues => ({
+      ...prevValues,
+      [e.target.name]: e.target.value
+    }))
+  }
 
-      {/* Sign Up Dialog */}
-      <Dialog size="xs" open={signUpOpen} handler={handleSignUpClose}>
-      <div className="flex items-center justify-center  ">
-       <Card shadow={true} className="p-7">
-        <Typography variant="h4" color="blue-gray">
-          Sign Up
-        </Typography>
-        <Typography color="gray" className="mt-1 font-normal">
-          Nice to meet you! Enter your details to register.
-        </Typography>
-        <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
-          <div className="mb-1 flex flex-col gap-6">
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
-              Your Name
-            </Typography>
-            <Input
-              size="lg"
-              placeholder="name@mail.com"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-            />
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
-              Your Email
-            </Typography>
-            <Input
-              size="lg"
-              placeholder="name@mail.com"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-            />
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
-              Password
-            </Typography>
-            <Input
-              type="password"
-              size="lg"
-              placeholder="********"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
+  return (
+    <div className="container w-full max-w-md mx-auto xl:max-w-3xl h-full flex bg-white rounded-lg shadow overflow-hidden m-5">
+      <div className="relative hidden xl:block xl:w-1/2 h-full">
+        <img
+          className="absolute h-auto w-full "
+          src="https://images.unsplash.com/photo-1541233349642-6e425fe6190e"
+          alt="my zomato"
+        />
+      </div>
+      <div className="w-full xl:w-1/2 p-8">
+        <form method="post" action="#" onSubmit={handleSubmit}>
+          <h1 className="text-2xl font-bold">Sign in to your account</h1>
+          <div>
+            <span className="text-gray-600 text-sm">
+              Do you have an account?  
+            </span>
+            <button className="text-gray-700 text-sm font-semibold">
+              Sign in
+            </button>
+          </div>
+          <div className="mb-4 mt-6">
+            <label
+              className="block text-gray-700 text-sm font-semibold mb-2"
+              htmlFor="username"
+            >
+              User Name
+            </label>
+            <input
+              name="username"
+              value={values.username}
+              className="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-200 leading-tight focus:outline-none focus:shadow-outline h-10"
+              id="username"
+              type="text"
+              placeholder="Your Username"
+              onChange={handleChange}
             />
           </div>
-          <Checkbox
-            label={
-              <Typography
-                variant="small"
-                color="gray"
-                className="flex items-center font-normal"
-              >
-                I agree the
-                <a
-                  href="#"
-                  className="font-medium transition-colors hover:text-gray-900"
-                >
-                  &nbsp;Terms and Conditions
-                </a>
-              </Typography>
-            }
-            containerProps={{ className: "-ml-2.5" }}
-          />
-          <Button className="mt-6" fullWidth>
-            sign up
-          </Button>
-          <Typography color="gray" className="mt-4 text-center font-normal">
-            Already have an account?{" "}
-            <a href="#" className=" text-gray-900 font-bold">
-              Sign In
+          <div className="mb-4 mt-6">
+            <label
+              className="block text-gray-700 text-sm font-semibold mb-2"
+              htmlFor="email"
+            >
+              Email
+            </label>
+            <input
+              name="email"
+              value={values.email}
+              className="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-200 leading-tight focus:outline-none focus:shadow-outline h-10"
+              id="email"
+              type="text"
+              placeholder="Your email address"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-6 mt-6">
+            <label
+              className="block text-gray-700 text-sm font-semibold mb-2"
+              htmlFor="password"
+            >
+              Password
+            </label>
+            <input
+              name="password"
+              value={values.password}
+              className="text-sm bg-gray-200 appearance-none rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline h-10"
+              id="password"
+              type="password"
+              placeholder="Your password"
+              onChange={handleChange}
+            />
+            <label
+              className="block text-gray-700 text-sm font-semibold mb-2"
+              htmlFor="password"
+            >
+              Conferme you password
+            </label>
+            <input
+              name="password"
+              value={values.password}
+              className="text-sm bg-gray-200 appearance-none rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline h-10"
+              id="password"
+              type="password"
+              placeholder="Your password"
+              onChange={handleChange}
+            />
+
+            <a
+              className="inline-block align-baseline text-sm text-gray-600 hover:text-gray-800"
+              href="#"
+            >
+              Forgot Password?
             </a>
-          </Typography>
+          </div>
+          <div className="flex w-full mt-8">
+            <button
+              className="w-full bg-gray-800 hover:bg-grey-900 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-10"
+              type="submit"
+            >
+              Sign up
+            </button>
+          </div>
         </form>
-      </Card>
       </div>
-      </Dialog>
-    </>
+    </div>
   );
 }
