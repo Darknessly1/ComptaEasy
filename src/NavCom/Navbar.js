@@ -5,6 +5,7 @@ import ChipsProfile from '../Elements/ChipsProfile';
 import Login from '../Elements/Login';
 import ProfileMenu from '../Elements/ProfileMenu';
 import LoginForm from '../Elements/Login';
+import Calc from '../Pages/Calc';
 
 
 const Navbar = () => {
@@ -39,6 +40,12 @@ const Navbar = () => {
             <a href="/News" className="hover:underline">
               <Button variant="gradient" className="rounded-full no-underline">
                 News
+              </Button>
+            </a>
+
+            <a href='/Calc'>
+              <Button>
+                Calculate
               </Button>
             </a>
 
@@ -149,6 +156,10 @@ const Navbar = () => {
                 </div>
               )}
             </div>
+
+            
+
+
 
             {/* should be a if condiciont, if the user didn't singup it will shouw him the sing up
               if he's a usr it will the following be appear in his page <ProfileMenu /> */}
