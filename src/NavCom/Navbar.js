@@ -27,7 +27,7 @@ const Navbar = () => {
         <div className="container mx-auto flex justify-between items-center">
 
           <div className="font-bold text-xl">
-            <a href='/Welcome'>
+            <a href='/'>
               <Button variant="rounded-full" className="rounded-full no-underline text-xl">
                 Compta Easy
               </Button>
@@ -95,8 +95,6 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-
-
 
             <div className="relative inline-block text-left">
               <button
