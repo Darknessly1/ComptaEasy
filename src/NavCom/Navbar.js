@@ -36,7 +36,7 @@ const Navbar = () => {
           </div>
 
           <div className="space-x-4">
-
+            
             <a href="/News" className="hover:underline">
               <Button variant="gradient" className="rounded-full no-underline">
                 News
@@ -46,6 +46,12 @@ const Navbar = () => {
             <a href='/Calc'>
               <Button>
                 Calculate
+              </Button>
+            </a>
+
+            <a href='/ArchiveTable'>
+              <Button>
+                Archive Table
               </Button>
             </a>
 

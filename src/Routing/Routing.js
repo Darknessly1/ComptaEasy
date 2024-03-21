@@ -11,6 +11,7 @@ import LoginForm from '../Elements/Login';
 import SignIn from '../Elements/Signin';
 import { Navbar } from '@material-tailwind/react';
 import Calc from '../Pages/Calc';
+import ArchiveTable from '../Pages/ArchiveTable';
 
 
 export default function Routing() {
@@ -28,6 +29,7 @@ export default function Routing() {
                 <Route path="/Login" element={<LoginForm />} />
                 <Route path="/Signin" element={<SignIn />} />
                 <Route path="/Calc" element={<Calc />} />
+                <Route path="/ArchiveTable" element={<ArchiveTable />} />
             </Routes>
         </div>
     )

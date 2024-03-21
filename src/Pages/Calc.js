@@ -76,17 +76,17 @@ export default function PrixRevient() {
                 prevRows.map(row =>
                     row.id === id ? {
                         ...row,
-                        data: [...row.data.slice(0, index), value, ...row.data.slice(index + 1)],
-                        textValues: [...row.textValues.slice(0, index), value, ...row.textValues.slice(index + 1)] // Update textValues
+                        data: [...(row.data || []).slice(0, index), value, ...(row.data || []).slice(index + 1)],
+                        textValues: [...(row.textValues || []).slice(0, index), value, ...(row.textValues || []).slice(index + 1)] // Update textValues
                     } : row
                 )
             );
         }
     };
+    
     const calculatePrixDeRevientForRow = (rowData) => {
-        return rowData.slice(2).reduce((total, value) => total + parseFloat(value || 0), 0).toFixed(2);
+        return (rowData || []).slice(2).reduce((total, value) => total + parseFloat(value || 0), 0).toFixed(2);
     };
-
 
     const tableHeaders = [
         'Date',
@@ -231,7 +231,7 @@ export default function PrixRevient() {
     
 
     return (
-        <div className="m-2">
+        <>
             <div class="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
                 <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white rounded-none bg-clip-border">
                     <div class="flex items-center justify-between gap-8 mb-8">
@@ -615,6 +615,6 @@ export default function PrixRevient() {
                     )}
                 </div>
             </div >
-        </div>
+        </>
     )
 }
