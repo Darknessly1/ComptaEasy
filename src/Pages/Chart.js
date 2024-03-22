@@ -42,7 +42,7 @@ const SearchBarFilter = () => {
 
   useEffect(() => {
     setFilteredSentences(allSentences);
-  }, []);
+  }, [allSentences]);
 
   const handleInputChange = (event) => {
     const { value } = event.target;

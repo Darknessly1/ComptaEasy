@@ -84,12 +84,12 @@ export default function SignIn() {
                             type="password"
                             placeholder="Your password"
                         />
-                        <a
+                        {/* <a
                             class="inline-block align-baseline text-sm text-gray-600 hover:text-gray-800"
                             href="#"
                         >
                             Forgot Password?
-                        </a>
+                        </a> */}
                     </div>
                     <div class="flex w-full mt-8">
                         <button

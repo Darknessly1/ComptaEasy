@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Button } from "@material-tailwind/react";
 import Routing from '../Routing/Routing';
 import ProfileMenu from '../Elements/ProfileMenu';
-import Calc from '../Pages/Calc';
 
 
 const Navbar = () => {
@@ -168,11 +167,11 @@ const Navbar = () => {
               </Button>
             </a>
 
-            <a className="hover:underline">
+            {/* <a className="hover:underline">
               <Button className="w-fit">
                 <ProfileMenu />
               </Button>
-            </a>
+            </a> */}
 
           </div>
         </div>
