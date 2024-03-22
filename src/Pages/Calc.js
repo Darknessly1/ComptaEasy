@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"
-import jsPDF from "jspdf";
 import 'jspdf-autotable';
 import axios from "axios";
 
@@ -25,7 +24,7 @@ export default function PrixRevient() {
     const handleArchive = async () => {
         try {
             const response = await axios.post('http://localhost:8081/archive-table', { tableName: 'your_table_name' });
-            console.log(response.data.message); // Log success message
+            console.log(response.data.message);
         } catch (error) {
             console.error('Error archiving table:', error);
         }
@@ -126,22 +125,20 @@ export default function PrixRevient() {
 
 
     const generatePDF = () => {
-        // Open a new window
+        
         const win = window.open('', '', 'width=800,height=600');
 
-        // Define table headers (excluding Edit and Delete)
-        const headers = [...tableHeaders]; // Assuming tableHeaders is defined elsewhere in your component
+        
+        const headers = [...tableHeaders]; 
 
-        // Calculate the width of each column dynamically based on the content
         const columnWidths = tableHeaders.map((header, index) => {
             const maxCellWidth = Math.max(
-                header.length * 8, // Estimate the width based on the length of the header
-                ...savedLines.map(row => (row.data[index]?.toString().length || 0) * 8) // Estimate the width based on the length of the content
+                header.length * 8, 
+                ...savedLines.map(row => (row.data[index]?.toString().length || 0) * 8) 
             );
-            return { width: Math.max(maxCellWidth, 80) }; // Minimum width of 80 pixels for columns
+            return { width: Math.max(maxCellWidth, 80) }; 
         });
 
-        // Construct the HTML content with your table and additional text
         const htmlContent = `
             <!DOCTYPE html>
             <html lang="en">
@@ -195,33 +192,33 @@ export default function PrixRevient() {
                     <thead>
                         <tr>
                             ${headers.map((header, index) => {
-            return `<th style="width: ${columnWidths[index].width}px;">${header}</th>`;
-        }).join('')}
+                                return `<th style="width: ${columnWidths[index].width}px;">${header}</th>`;
+                            }).join('')}
                         </tr>
                     </thead>
                     <tbody>
                         ${savedLines.map(row => `
                             <tr>
                                 ${row.data.map((cell, index) => {
-            if (index === headers.indexOf("Puissance GE/Triphasé 230/400v")) {
-                return `<td>${row.textValues && row.textValues[index] || ''}</td>`;
-            } else if (index === headers.indexOf("Prix de Revient")) {
-                return `<td>${calculatePrixDeRevientForRow(row.data)}</td>`;
-            } else if (index === headers.indexOf("Amount")) {
-                return `
-                                            <td class="amount">
-                                                <div class="amount-text">${row.textValues && row.textValues[index] || ''}</div>
-                                                <hr/>
-                                                <div class="amount-value">${cell}</div>
-                                            </td>
-                                        `;
-            } else if (index === headers.indexOf("Date")) {
-                const date = new Date(cell);
-                return `<td>${date.toLocaleDateString()}</td>`;
-            } else {
-                return `<td>${row.textValues && row.textValues[index] || ''} ${cell}</td>`;
-            }
-        }).join('')}
+                                if (index === headers.indexOf("Puissance GE/Triphasé 230/400v")) {
+                                    return `<td>${row.textValues && row.textValues[index] || ''}</td>`;
+                                } else if (index === headers.indexOf("Prix de Revient")) {
+                                    return `<td>${calculatePrixDeRevientForRow(row.data)}</td>`;
+                                } else if (index === headers.indexOf("Amount")) {
+                                    return `
+                                                                <td class="amount">
+                                                                    <div class="amount-text">${row.textValues && row.textValues[index] || ''}</div>
+                                                                    <hr/>
+                                                                    <div class="amount-value">${cell}</div>
+                                                                </td>
+                                                            `;
+                                } else if (index === headers.indexOf("Date")) {
+                                    const date = new Date(cell);
+                                    return `<td>${date.toLocaleDateString()}</td>`;
+                                } else {
+                                    return `<td>${row.textValues && row.textValues[index] || ''} ${cell}</td>`;
+                                }
+                            }).join('')}
                             </tr>
                         `).join('')}
                     </tbody>
@@ -230,13 +227,10 @@ export default function PrixRevient() {
             </html>
         `;
 
-        // Write the HTML content to the new window
         win.document.write(htmlContent);
 
-        // Add a button to the new window for printing
         win.document.write('<button onclick="window.print()">Print</button>');
 
-        // Close the document
         win.document.close();
     };
 
@@ -278,23 +272,8 @@ export default function PrixRevient() {
                             </button>
 
                         </div>
-                        <div class="w-full md:w-72">
-                            <div class="relative h-10 w-full min-w-[200px]">
-                                <div class="absolute grid w-5 h-5 top-2/4 right-3 -translate-y-2/4 place-items-center text-blue-gray-500">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                        stroke="currentColor" aria-hidden="true" class="w-5 h-5">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
-                                    </svg>
-                                </div>
-                                <input
-                                    class="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 !pr-9 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-                                    placeholder=" " />
-                                <label
-                                    class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight text-gray-500 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-gray-900 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-gray-900 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                                    Search
-                                </label>
-                            </div>
+                        <div class="w-full md:w-40">
+                            
                         </div>
                     </div>
                 </div>

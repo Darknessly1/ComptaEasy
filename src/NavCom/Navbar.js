@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from "@material-tailwind/react";
 import Routing from '../Routing/Routing';
-import ChipsProfile from '../Elements/ChipsProfile';
-import Login from '../Elements/Login';
 import ProfileMenu from '../Elements/ProfileMenu';
-import LoginForm from '../Elements/Login';
 import Calc from '../Pages/Calc';
 
 
@@ -49,11 +46,6 @@ const Navbar = () => {
               </Button>
             </a>
 
-            <a href='/ArchiveTable'>
-              <Button>
-                Archive Table
-              </Button>
-            </a>
 
             <div className="relative inline-block text-left">
               <button
