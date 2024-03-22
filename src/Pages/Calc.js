@@ -201,13 +201,13 @@ export default function PrixRevient() {
                             <tr>
                                 ${row.data.map((cell, index) => {
                                 if (index === headers.indexOf("Puissance GE/Triphasé 230/400v")) {
-                                    return `<td>${(row.textValues && row.textValues[index] || '')}</td>`;
+                                    return `<td>${((row.textValues && row.textValues[index]) || '')}</td>`;
                                 } else if (index === headers.indexOf("Prix de Revient")) {
                                     return `<td>${calculatePrixDeRevientForRow(row.data)}</td>`;
                                 } else if (index === headers.indexOf("Amount")) {
                                     return `
                                         <td class="amount">
-                                            <div class="amount-text">${(row.textValues && row.textValues[index] || '')}</div>
+                                            <div class="amount-text">${((row.textValues && row.textValues[index]) || '')}</div>
                                             <hr/>
                                             <div class="amount-value">${cell}</div>
                                         </td>
@@ -216,7 +216,7 @@ export default function PrixRevient() {
                                     const date = new Date(cell);
                                     return `<td>${date.toLocaleDateString()}</td>`;
                                 } else {
-                                    return `<td>${(row.textValues && row.textValues[index] || '')} ${cell}</td>`;
+                                    return `<td>${((row.textValues && row.textValues[index]) || '')} ${cell}</td>`;
                                 }
                             }).join('')}
                             </tr>
@@ -307,9 +307,9 @@ export default function PrixRevient() {
                                                 ) : index === 1 ? (
                                                     <input
                                                         type="text" // Change type from "number" to "text"
-                                                        value={(row.textValues && row.textValues[index] || '')} // Check if row.textValues is defined
+                                                        value={((row.textValues && row.textValues[index]) || '')}
                                                         onChange={(e) => {
-                                                            const updatedTextValues = [...(row.textValues || [])]; // Initialize as an empty array if undefined
+                                                            const updatedTextValues = [...(row.textValues || [])];
                                                             updatedTextValues[index] = e.target.value;
                                                             const updatedRow = { ...row, textValues: updatedTextValues };
                                                             setRows(prevRows =>
@@ -327,7 +327,7 @@ export default function PrixRevient() {
                                                     <>
                                                         <input
                                                             type="text"
-                                                            value={(row.textValues && row.textValues[index] || '')} 
+                                                            value={((row.textValues && row.textValues[index]) || '')} 
                                                             onChange={(e) => {
                                                                 const updatedTextValues = [...(row.textValues || [])]; 
                                                                 updatedTextValues[index] = e.target.value;
@@ -451,7 +451,7 @@ export default function PrixRevient() {
                                                             editingRow === row.id ? (
                                                                 <input
                                                                     type="text"
-                                                                    value={(row.textValues && row.textValues[index] || '')}
+                                                                    value={((row.textValues && row.textValues[index]) || '')}
                                                                     onChange={(e) => {
                                                                         const updatedTextValues = [...(row.textValues || [])];
                                                                         updatedTextValues[index] = e.target.value;
@@ -466,7 +466,7 @@ export default function PrixRevient() {
                                                                     className="m-2 border-gray-900"
                                                                 />
                                                             ) : (
-                                                                (row.textValues && row.textValues[index] || '')
+                                                                ((row.textValues && row.textValues[index]) || '')
                                                             )
                                                         ) : index === 2 ? (
                                                             calculatePrixDeRevientForRow(row.data)
@@ -476,7 +476,7 @@ export default function PrixRevient() {
                                                                     <>
                                                                         <input
                                                                             type="text"
-                                                                            value={(row.textValues && row.textValues[index] || '')}
+                                                                            value={((row.textValues && row.textValues[index]) || '')}
                                                                             onChange={(e) => {
                                                                                 const updatedTextValues = [...(row.textValues || [])];
                                                                                 updatedTextValues[index] = e.target.value;
@@ -510,7 +510,7 @@ export default function PrixRevient() {
                                                                     </>
                                                                 ) : (
                                                                     <>
-                                                                        <span>{(row.textValues && row.textValues[index] || '')}</span>
+                                                                        <span>{((row.textValues && row.textValues[index]) || '')}</span>
                                                                         <br />
                                                                         <span>{cell}</span>
                                                                     </>

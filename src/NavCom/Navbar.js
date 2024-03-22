@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from "@material-tailwind/react";
 import Routing from '../Routing/Routing';
-import ProfileMenu from '../Elements/ProfileMenu';
+// import ProfileMenu from '../Elements/ProfileMenu';
 
 
 const Navbar = () => {
@@ -32,7 +32,7 @@ const Navbar = () => {
           </div>
 
           <div className="space-x-4">
-            
+
             <a href="/News" className="hover:underline">
               <Button variant="gradient" className="rounded-full no-underline">
                 News
@@ -82,12 +82,6 @@ const Navbar = () => {
                     className="py-2 text-sm text-gray-700 dark:text-gray-200"
                     aria-labelledby="dropdownDividerButton"
                   >
-                    <li>
-                      <a href="/Chart" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                        Chart of Accounting
-                      </a>
-                    </li>
-
                     <li>
                       <a href="/Booking" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                         Booking
@@ -154,7 +148,7 @@ const Navbar = () => {
               )}
             </div>
 
-            
+
 
 
 
