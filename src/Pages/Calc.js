@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import jsPDF from "jspdf";
 import 'jspdf-autotable';
+import axios from "axios";
 
 
 export default function PrixRevient() {
@@ -19,6 +20,17 @@ export default function PrixRevient() {
     const [editingTable, setEditingTable] = useState(false);
     const [editingRow, setEditingRow] = useState(null);
     const [isEditingSecondTable, setIsEditingSecondTable] = useState(false);
+
+
+    const handleArchive = async () => {
+        try {
+            const response = await axios.post('http://localhost:8081/archive-table', { tableName: 'your_table_name' });
+            console.log(response.data.message); // Log success message
+        } catch (error) {
+            console.error('Error archiving table:', error);
+        }
+    };
+
 
     useEffect(() => {
         localStorage.setItem("rows", JSON.stringify(rows));
@@ -83,7 +95,7 @@ export default function PrixRevient() {
             );
         }
     };
-    
+
     const calculatePrixDeRevientForRow = (rowData) => {
         return (rowData || []).slice(2).reduce((total, value) => total + parseFloat(value || 0), 0).toFixed(2);
     };
@@ -116,10 +128,10 @@ export default function PrixRevient() {
     const generatePDF = () => {
         // Open a new window
         const win = window.open('', '', 'width=800,height=600');
-    
+
         // Define table headers (excluding Edit and Delete)
         const headers = [...tableHeaders]; // Assuming tableHeaders is defined elsewhere in your component
-    
+
         // Calculate the width of each column dynamically based on the content
         const columnWidths = tableHeaders.map((header, index) => {
             const maxCellWidth = Math.max(
@@ -128,7 +140,7 @@ export default function PrixRevient() {
             );
             return { width: Math.max(maxCellWidth, 80) }; // Minimum width of 80 pixels for columns
         });
-    
+
         // Construct the HTML content with your table and additional text
         const htmlContent = `
             <!DOCTYPE html>
@@ -183,33 +195,33 @@ export default function PrixRevient() {
                     <thead>
                         <tr>
                             ${headers.map((header, index) => {
-                                return `<th style="width: ${columnWidths[index].width}px;">${header}</th>`;
-                            }).join('')}
+            return `<th style="width: ${columnWidths[index].width}px;">${header}</th>`;
+        }).join('')}
                         </tr>
                     </thead>
                     <tbody>
                         ${savedLines.map(row => `
                             <tr>
                                 ${row.data.map((cell, index) => {
-                                    if (index === headers.indexOf("Puissance GE/Triphasé 230/400v")) {
-                                        return `<td>${row.textValues && row.textValues[index] || '' }</td>`;
-                                    } else if (index === headers.indexOf("Prix de Revient")) {
-                                        return `<td>${calculatePrixDeRevientForRow(row.data)}</td>`;
-                                    } else if (index === headers.indexOf("Amount")) {
-                                        return `
+            if (index === headers.indexOf("Puissance GE/Triphasé 230/400v")) {
+                return `<td>${row.textValues && row.textValues[index] || ''}</td>`;
+            } else if (index === headers.indexOf("Prix de Revient")) {
+                return `<td>${calculatePrixDeRevientForRow(row.data)}</td>`;
+            } else if (index === headers.indexOf("Amount")) {
+                return `
                                             <td class="amount">
                                                 <div class="amount-text">${row.textValues && row.textValues[index] || ''}</div>
                                                 <hr/>
                                                 <div class="amount-value">${cell}</div>
                                             </td>
                                         `;
-                                    } else if (index === headers.indexOf("Date")) {
-                                        const date = new Date(cell);
-                                        return `<td>${date.toLocaleDateString()}</td>`;
-                                    } else {
-                                        return `<td>${row.textValues && row.textValues[index] || ''} ${cell}</td>`;
-                                    }
-                                }).join('')}
+            } else if (index === headers.indexOf("Date")) {
+                const date = new Date(cell);
+                return `<td>${date.toLocaleDateString()}</td>`;
+            } else {
+                return `<td>${row.textValues && row.textValues[index] || ''} ${cell}</td>`;
+            }
+        }).join('')}
                             </tr>
                         `).join('')}
                     </tbody>
@@ -217,21 +229,21 @@ export default function PrixRevient() {
             </body>
             </html>
         `;
-    
+
         // Write the HTML content to the new window
         win.document.write(htmlContent);
-    
+
         // Add a button to the new window for printing
         win.document.write('<button onclick="window.print()">Print</button>');
-    
+
         // Close the document
         win.document.close();
     };
-    
-    
+
+
 
     return (
-        <>
+        <div className=" m-3">
             <div class="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
                 <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white rounded-none bg-clip-border">
                     <div class="flex items-center justify-between gap-8 mb-8">
@@ -530,7 +542,9 @@ export default function PrixRevient() {
                                                 ))}
                                             </tr>
                                         ))}
-
+                                        <tr>
+                                            <button onClick={handleArchive}>Archive</button>
+                                        </tr>
                                     </tbody>
 
                                 </table>
@@ -615,6 +629,6 @@ export default function PrixRevient() {
                     )}
                 </div>
             </div >
-        </>
+        </div   >
     )
 }
